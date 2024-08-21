@@ -1,4 +1,4 @@
-import { afterNextRender, afterRender, Component, DestroyRef, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { afterNextRender, afterRender, Component, DestroyRef, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -16,6 +16,11 @@ export class ServerStatusComponent implements OnInit  {
 
   constructor () {
     console.log("this.currentstatus",this.currentStatus());
+
+    // when the signals change their value.
+    effect(()=>{
+      console.log("this.currentstatus effect",this.currentStatus());
+    });
 
     //execute one time when all dom is completed.
     afterRender(()=>{
