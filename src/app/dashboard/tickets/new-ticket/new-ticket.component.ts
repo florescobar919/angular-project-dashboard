@@ -1,4 +1,4 @@
-import { AfterViewInit,output, Component, ElementRef, viewChild, ViewChild, viewChildren } from '@angular/core';
+import { AfterViewInit,output, Component, ElementRef, viewChild, } from '@angular/core';
 import { ControlComponent } from '../../../shared/control/control.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { FormsModule } from '@angular/forms';
@@ -11,21 +11,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css'
 })
 export class NewTicketComponent implements AfterViewInit{
-
-  //@ViewChild('form') form? : ElementRef<HTMLFormElement>;
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
   add = output<{title: string; text: string}>();
-  
-  onSubmit(titleInput: string, requestInput: string) {
-    //console.log(titleInput);
-    //console.dir(titleInput);
-    this.add.emit({title: titleInput, text: requestInput});
-    console.log('TITLE:' + titleInput+" //// REQUEST:"+ requestInput);
-    this.form().nativeElement.reset();
 
-    //this.form?.nativeElement.reset();
-  }
+  txtTitle: string = '';
+  txtRequest: string = '';
 
   ngOnInit() {
     console.log("ngOnInit");    
@@ -34,7 +25,12 @@ export class NewTicketComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     console.log("ngAfterViewInit");    
-    console.log(this.form().nativeElement);
-    
+    console.log(this.form().nativeElement);    
+  }
+
+  onSubmit() {
+    this.add.emit({title: this.txtTitle, text: this.txtRequest});
+    this.txtTitle = '';
+    this.txtRequest = '';
   }
 }
