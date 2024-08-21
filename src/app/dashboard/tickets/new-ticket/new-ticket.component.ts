@@ -11,11 +11,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-ticket.component.css'
 })
 export class NewTicketComponent {
-  onSubmit(titleInput: HTMLInputElement) {
+  onSubmit(titleInput: string, requestInput: string) {
     //console.log(titleInput);
     //console.dir(titleInput);
-    const title = titleInput.value;
-    console.log('TITLE:' + title);
+    console.log('TITLE:' + titleInput+" //// REQUEST:"+ requestInput);
     
   }
 }
